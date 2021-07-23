@@ -6,7 +6,7 @@ import data from './data.js'
 function App() {
 
   let [shoes,shoes변경] = useState(data);
-  let products = [<Product1/>,<Product2/>,<Product3/>];
+
 
   return (
     <div className="App">
@@ -42,44 +42,25 @@ function App() {
       </Jumbotron>
       <div className="container"> 
         <div className="row">
-          <Product1 상품명 = {shoes[0].title} 내용 = {shoes[0].content} 가격 = {shoes[0].price} />
-          <Product2 상품명 = {shoes[1].title} 내용 = {shoes[1].content} 가격 = {shoes[1].price} />
-          <Product3 상품명 = {shoes[2].title} 내용 = {shoes[2].content} 가격 = {shoes[2].price} />
+          {
+            shoes.map((a,i) => {
+              return <Product shoes={shoes[i]} i={i} />
+            })
+          }
         </div>
       </div>
     </div>
   );
 }
 
-function Product1(props) {
+function Product(props) {
   return(
-  <div className="col-md-4"><img src="https://codingapple1.github.io/shop/shoes1.jpg" width="100%"/>
-    <h4>{props.상품명}</h4>
-    <p>{props.내용}</p>
-    <p>{props.가격}₩</p>
+  <div className="col-md-4"><img src={"https://codingapple1.github.io/shop/shoes"+(props.i+1)+".jpg"} width="100%"/>
+    <h4>{props.shoes.title}</h4>
+    <p>{props.shoes.content}</p>
+    <p>{props.shoes.price}₩</p>
   </div>
   )
 }
-
-function Product2(props) {
-  return(
-  <div className="col-md-4"><img src="https://codingapple1.github.io/shop/shoes2.jpg" width="100%"/>
-    <h4>{props.상품명}</h4>
-    <p>{props.내용}</p>
-    <p>{props.가격}₩</p>
-  </div>
-  )
-}
-
-function Product3(props) {
-  return(
-  <div className="col-md-4"><img src="https://codingapple1.github.io/shop/shoes3.jpg" width="100%"/>
-    <h4>{props.상품명}</h4>
-    <p>{props.내용}</p>
-    <p>{props.가격}₩</p>
-  </div>
-  )
-}
-
 
 export default App;
