@@ -1,0 +1,34 @@
+
+
+// $메인컬러 : #ff0000;
+
+// .red {
+//     color: $메인컬러;
+// }
+
+// div.container {
+//     h4{
+//         color: blue;
+//     }
+
+//     p {
+//         color: green;
+//     }
+// }
+
+.my-alert  {
+    background-color: #eeeeee;
+    padding: 20px;
+    border-radius: 5px;
+    max-width: 500px;
+    width: 100%;
+    margin: auto;
+    p {
+        margin-bottom: 0;
+    }
+}
+
+.my-alert-red {
+    @extend .my-alert;
+    background-color: #ff0000;
+}
