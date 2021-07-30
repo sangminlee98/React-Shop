@@ -4,10 +4,15 @@ import { Navbar, Container, Nav, NavDropdown, Jumbotron, Button} from 'react-boo
 import data from './data.js'
 import { Link, Route, Switch } from 'react-router-dom';
 import Detail from './Detail';
+import axios from 'axios';
+import loadImg from './loading1.jpeg';
+
 
 
 function App() {
   let [shoes,shoes변경] = useState(data);
+  let [loading,loading변경] = useState(false);
+  let [재고,재고변경] = useState([10,11,12]);
 
 
   return (
@@ -54,11 +59,40 @@ function App() {
                   )
                 }
             </div>
+            <button className="btn btn-primary"  onClick={()=>{
+              
+              loading변경(true);
+              // axios.post('서버URL',{id : 'codingapple', pw : 1234});
+              // fetch('https://codingapple1.github.io/shop/data2.json')
+              // .then() fetch는 json데이터를 object로 바꿔주지 않음 따로 해야됨
+              axios.get('https://codingapple1.github.io/shop/data2.json')
+              .then((result)=>{
+                setTimeout(()=>{
+                  loading변경(false);
+                  shoes변경([...shoes, ...result.data]);
+                },1000);
+              })
+              .catch(()=>{
+                loading변경(false);
+                console.log("실패했어요");
+              })
+            }}>더보기</button>
+            {
+              loading === true ?
+              <div>
+               <img style={{width: '50px'}} src={loadImg}/>
+              </div>
+              : null
+            }
           </div>
         </Route>
 
+
+
+
+
         <Route path="/detail/:id">
-          <Detail shoes = {shoes}/>
+          <Detail shoes = {shoes} 재고 = {재고} 재고변경 = {재고변경}/>
         </Route>
       </Switch>
     </div>
