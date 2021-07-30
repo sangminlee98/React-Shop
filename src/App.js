@@ -14,12 +14,12 @@ function App() {
     <div className="App">
       <Navbar bg="light" expand="lg">
         <Container>
-          <Navbar.Brand href="#home">ShoeShop</Navbar.Brand>
+          <Navbar.Brand as={Link} to="/">ShoeShop</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link><Link to="/">Home</Link></Nav.Link>
-              <Nav.Link><Link to="/detail">Detail</Link></Nav.Link>
+              <Nav.Link as={Link} to="/">Home</Nav.Link>
+              <Nav.Link as={Link} to="/detail">Detail</Nav.Link>
               <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
@@ -60,10 +60,6 @@ function App() {
         <Route path="/detail/:id">
           <Detail shoes = {shoes}/>
         </Route>
-        
-        <Route path="/:id">
-          <div>아무거나</div>
-        </Route>
       </Switch>
     </div>
   );
@@ -73,7 +69,7 @@ function Card(props) {
   return(
     <div className="col-md-4">
       <img src={"https://codingapple1.github.io/shop/shoes"+(props.i+1)+".jpg"} width={"100%"}/>
-      <h4>{props.shoes.title}</h4>
+      <h4><Link to={"/detail/"+props.i}>{props.shoes.title}</Link></h4>
       <p>{props.shoes.content}</p>
       <p>{props.shoes.price}₩</p>
     </div>
