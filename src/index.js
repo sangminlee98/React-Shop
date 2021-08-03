@@ -5,12 +5,11 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 import { BrowserRouter } from 'react-router-dom';
-import {Provider} from 'react-redux';
-import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import { combineReducers, createStore} from 'redux';
+import { reducer, reducer2 } from './reducer';
 
-let store = createStore(()=>{
-  return [{id : 0, name : '멋진신발', quan : 2},{id : 1, name : '이쁜신발', quan : 4}]
-});
+let store = createStore(combineReducers({reducer,reducer2}));
 
 ReactDOM.render(
   <React.StrictMode> 
