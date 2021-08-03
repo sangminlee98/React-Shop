@@ -1,6 +1,7 @@
 import React from 'react';
 import {Table} from 'react-bootstrap';
 import { connect } from 'react-redux';
+import './Detail.scss';
 
 
 function Cart(props) {
@@ -9,7 +10,7 @@ function Cart(props) {
             <Table responsive="sm">
                 <thead>
                 <tr>
-                    <th>#</th>
+                    <th>상품번호</th>
                     <th>상품명</th>
                     <th>수량</th>
                     <th>변경</th>
@@ -24,10 +25,10 @@ function Cart(props) {
                                     <td>{a.name}</td>
                                     <td>{a.quan}</td>
                                     <td><button onClick={()=>{
-                                        props.dispatch({type : '수량증가'})
+                                        props.dispatch({type : '수량증가',payload : a.id })
                                     }}>+</button>
                                     <button onClick={()=>{
-                                        props.dispatch({type : '수량감소'})
+                                        props.dispatch({type : '수량감소',payload : a.id})
                                     }}>-</button>
                                     </td>
                                 </tr>
@@ -40,9 +41,9 @@ function Cart(props) {
                     props.alert열렸니 === true
                     ? (<div className="my-alert">
                         <p>지금 구매하면 20% 할인</p>
-                        <button onClick={()=>{
+                        <button className="close-btn" onClick={()=>{
                             props.dispatch({type : 'close'})
-                        }}>닫기</button>
+                        }}>X</button>
                     </div>)
                     : null
                 }

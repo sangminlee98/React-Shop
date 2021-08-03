@@ -2,7 +2,7 @@ import React, {useContext, useState} from 'react';
 import './App.css';
 import { Navbar, Container, Nav, NavDropdown, Jumbotron, Button} from 'react-bootstrap';
 import data from './data.js'
-import { Link, Route, Switch } from 'react-router-dom';
+import { Link, Route, Switch, useHistory } from 'react-router-dom';
 import Detail from './Detail';
 import Cart from './Cart';
 import axios from 'axios';
@@ -109,10 +109,11 @@ function App() {
 }
 
 function Card(props) {
+  let history = useHistory();
   return(
-    <div className="col-md-4">
+    <div className="col-md-4" onClick={()=>{ history.push('/detail/'+props.shoes.id) }}>
       <img src={"https://codingapple1.github.io/shop/shoes"+(props.i+1)+".jpg"} width={"100%"}/>
-      <h4><Link to={"/detail/"+props.i}>{props.shoes.title}</Link></h4>
+      <h4 style={{cursor : 'pointer'}}>{props.shoes.title}</h4>
       <p>{props.shoes.content}</p>
       <p>{props.shoes.price}₩</p>
       <Test i={props.i}/>

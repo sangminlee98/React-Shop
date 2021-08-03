@@ -1,18 +1,31 @@
-let 초기값 =  [
-    {id : 0, name : '멋진신발', quan : 2},
-    {id : 1, name : '이쁜신발', quan : 4}
-  ];
+let 초기값 =  [];
   
 
 function reducer (state = 초기값, action) {
-  if(action.type === '수량증가') {
+
+  if( action.type === '항목추가'){
     let copy = [...state];
-    copy[0].quan++;
+    let found = copy.findIndex((a)=>{return a.id === action.data.id})
+    if(found>= 0) {
+      copy[found].quan++;
+      return copy
+    } else{
+    copy.push(action.data);
+    return copy;
+    }
+
+  } else if(action.type === '수량증가') {
+    let copy = [...state];
+    copy[action.payload].quan++;
     return copy;
   } else if(action.type ==='수량감소') {
       let copy = [...state];
-      copy[0].quan--;
+      if(copy[action.payload].quan <= 0){
+        return copy;
+      } else {
+      copy[action.payload].quan--;
       return copy;
+      }
   } else {
     return state;
   }

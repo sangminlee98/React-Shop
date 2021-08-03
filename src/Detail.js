@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import './Detail.scss';
 import {Nav} from 'react-bootstrap';
 import {CSSTransition} from 'react-transition-group';
+import { connect } from 'react-redux';
 // import {재고context} from './App'; 
 
 
@@ -78,19 +79,17 @@ function Detail(props) {
               let b = [...props.재고];
               b[product.id] = a;
               props.재고변경(b);
+              props.dispatch({type : '항목추가', data : {id : product.id, name : product.title, quan : 1}})
             }}>주문하기</button>   
             <button className="btn btn-danger" onClick={()=>{ history.goBack();}}>뒤로가기</button> 
           </div>
         </div>
         <Nav className="mt-5" variant="tabs" defaultActiveKey="link-0">
           <Nav.Item>
-            <Nav.Link eventKey="link-0" onClick={()=>{스위치변경(false); 누른탭변경(0)}}>Active</Nav.Link>
+            <Nav.Link eventKey="link-0" onClick={()=>{스위치변경(false); 누른탭변경(0)}}>상품설명</Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link eventKey="link-1" onClick={()=>{스위치변경(false); 누른탭변경(1)}}>Option 1</Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link eventKey="link-2" onClick={()=>{스위치변경(false); 누른탭변경(2)}}>Option 2</Nav.Link>
+            <Nav.Link eventKey="link-1" onClick={()=>{스위치변경(false); 누른탭변경(1)}}>배송정보</Nav.Link>
           </Nav.Item>
         </Nav>
         <CSSTransition in={스위치} classNames="wow" timeout={500}>
@@ -113,10 +112,7 @@ function Detail(props) {
       return <div>0번째</div>
     } else if(props.누른탭 === 1) {
       return <div>1번째</div>
-    } else if(props.누른탭 === 2) {
-      return <div>2번째</div>
-    }
-    
+    } 
   }
 
 
@@ -125,5 +121,13 @@ function Detail(props) {
       <p>재고 : {props.재고[props.num]}</p>
     )
   }
+
+function state를props화(state) {
+  return {
+    state : state.reducer,
+    alert열렸니 : state.reducer2
+  }
+}
   
-  export default Detail;
+
+ export default connect(state를props화)(Detail);
