@@ -1,13 +1,15 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import './App.css';
 import { Navbar, Container, Nav, NavDropdown, Jumbotron, Button} from 'react-bootstrap';
 import data from './data.js'
 import { Link, Route, Switch } from 'react-router-dom';
 import Detail from './Detail';
+import Cart from './Cart';
 import axios from 'axios';
 import loadImg from './loading1.jpeg';
 
 
+export let 재고context = React.createContext();
 
 function App() {
   let [shoes,shoes변경] = useState(data);
@@ -51,6 +53,9 @@ function App() {
           </Jumbotron>
 
           <div className="container">
+
+            <재고context.Provider value={재고}>
+
             <div className="row">
                 {
                   shoes.map((a,i) => {
@@ -59,6 +64,8 @@ function App() {
                   )
                 }
             </div>
+
+            </재고context.Provider>
             <button className="btn btn-primary"  onClick={()=>{
               
               loading변경(true);
@@ -87,12 +94,14 @@ function App() {
           </div>
         </Route>
 
-
-
-
-
         <Route path="/detail/:id">
+          <재고context.Provider value={재고}>
           <Detail shoes = {shoes} 재고 = {재고} 재고변경 = {재고변경}/>
+          </재고context.Provider>
+        </Route>
+
+        <Route path="/cart">
+            <Cart />
         </Route>
       </Switch>
     </div>
@@ -106,7 +115,15 @@ function Card(props) {
       <h4><Link to={"/detail/"+props.i}>{props.shoes.title}</Link></h4>
       <p>{props.shoes.content}</p>
       <p>{props.shoes.price}₩</p>
+      <Test i={props.i}/>
     </div>
+  )
+}
+
+function Test(props) {
+  let 재고 = useContext(재고context);
+  return(
+    <p>재고 : {재고[props.i]}</p>
   )
 }
 
