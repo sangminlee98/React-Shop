@@ -16,14 +16,16 @@ function reducer (state = 초기값, action) {
 
   } else if(action.type === '수량증가') {
     let copy = [...state];
-    copy[action.payload].quan++;
+    let found = copy.findIndex((a)=>{return a.id === action.payload})
+    copy[found].quan++;
     return copy;
   } else if(action.type ==='수량감소') {
       let copy = [...state];
-      if(copy[action.payload].quan <= 0){
+      let found = copy.findIndex((a)=>{return a.id === action.payload})
+      if(copy[found].quan <= 0){
         return copy;
       } else {
-      copy[action.payload].quan--;
+      copy[found].quan--;
       return copy;
       }
   } else {
