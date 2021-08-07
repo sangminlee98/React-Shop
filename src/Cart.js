@@ -1,10 +1,12 @@
 import React from 'react';
 import {Table} from 'react-bootstrap';
-import { connect } from 'react-redux';
+import { connect,useDispatch, useSelector } from 'react-redux';
 import './Detail.scss';
 
 
 function Cart(props) {
+    let dispatch = useDispatch();
+    let state = useSelector((state)=>state)
     return(
         <div>
             <Table responsive="sm">
@@ -18,17 +20,17 @@ function Cart(props) {
                 </thead>
                 <tbody>
                     {
-                        props.state.map((a,i)=>{
+                        state.reducer.map((a,i)=>{
                             return(
                                 <tr key={i}>
                                     <td>{a.id}</td>
                                     <td>{a.name}</td>
                                     <td>{a.quan}</td>
                                     <td><button onClick={()=>{
-                                        props.dispatch({type : '수량증가',payload : a.id })
+                                        dispatch({type : '수량증가',payload : a.id })
                                     }}>+</button>
                                     <button onClick={()=>{
-                                        props.dispatch({type : '수량감소',payload : a.id})
+                                        dispatch({type : '수량감소',payload : a.id})
                                     }}>-</button>
                                     </td>
                                 </tr>

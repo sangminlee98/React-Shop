@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import './App.css';
 import { Navbar, Container, Nav, NavDropdown, Jumbotron, Button} from 'react-bootstrap';
 import data from './data.js'
@@ -51,6 +51,8 @@ function App() {
               <Button variant="primary">Learn more</Button>
             </p>
           </Jumbotron>
+
+          <App2/>
 
           <div className="container">
 
@@ -128,5 +130,22 @@ function Test(props) {
   )
 }
 
+function App2() {
+  let [count,setCount] = useState(0);
+  let [age,setAge] = useState(20);
+  useEffect(()=>{
+    if(count != 0 && count<3) {
+      setAge(age+1);
+    }
+  },[count])
+  return(
+    <div>
+      <div>안녕하십니까 전 {age}</div>
+      <button onClick={()=>{
+          setCount(count+1);
+      }}>누르면 한살먹기</button>
+    </div>
+  )
+}
 
 export default App;
