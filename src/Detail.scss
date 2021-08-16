@@ -55,3 +55,18 @@
     position: relative;
     left: 100px;
 }
+
+.watched {
+    border-left: 3px solid #eee;
+}
+
+.card {
+    text-align: center;
+    border: none;
+    transition: all 0.7s;
+    padding: 10px;
+}
+
+.card:hover {
+    background-color: #eee;
+}

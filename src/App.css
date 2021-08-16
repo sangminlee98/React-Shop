@@ -42,3 +42,12 @@
   background-size: cover;
   color: white;
 }
+
+.card {
+  border: none;
+  transition: all 0.7s;
+}
+
+.card:hover {
+  background-color: #eee;
+}

@@ -16,7 +16,6 @@ function App() {
   let [loading,loading변경] = useState(false);
   let [재고,재고변경] = useState([10,11,12]);
 
-
   return (
     <div className="App">
       <Navbar bg="light" expand="lg">
@@ -52,8 +51,6 @@ function App() {
             </p>
           </Jumbotron>
 
-          <App2/>
-
           <div className="container">
 
             <재고context.Provider value={재고}>
@@ -68,6 +65,8 @@ function App() {
             </div>
 
             </재고context.Provider>
+            
+
             <button className="btn btn-primary"  onClick={()=>{
               
               loading변경(true);
@@ -115,7 +114,7 @@ function App() {
 function Card(props) {
   let history = useHistory();
   return(
-    <div className="col-md-4" onClick={()=>{ history.push('/detail/'+props.shoes.id) }}>
+    <div className="col-md-4 card" onClick={()=>{ history.push('/detail/'+props.shoes.id) }}>
       <img src={"https://codingapple1.github.io/shop/shoes"+(props.i+1)+".jpg"} width={"100%"}/>
       <h4 style={{cursor : 'pointer'}}>{props.shoes.title}</h4>
       <p>{props.shoes.content}</p>
@@ -132,22 +131,6 @@ function Test(props) {
   )
 }
 
-function App2() {
-  let [count,setCount] = useState(0);
-  let [age,setAge] = useState(20);
-  useEffect(()=>{
-    if(count != 0 && count<3) {
-      setAge(age+1);
-    }
-  },[count])
-  return(
-    <div>
-      <div>안녕하십니까 전 {age}</div>
-      <button onClick={()=>{
-          setCount(count+1);
-      }}>누르면 한살먹기</button>
-    </div>
-  )
-}
+
 
 export default App;
